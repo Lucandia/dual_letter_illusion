@@ -5,8 +5,6 @@ import os
 import time
 import base64
 from math import pi, sin, cos
-fontsize = 20
-extr = fontsize*2 # extrude letter
 
 def render_svg(svg):
     """Renders the given svg string."""
@@ -107,12 +105,15 @@ if __name__ == "__main__":
     st.title('TextTango: dual text illusion')
     st.write("Generate flexi 3D models from images! If you like the project put a like on [Printables](https://www.printables.com/it/model/520333-texttango-dual-letter-illusion) or [support me with a coffee](https://www.paypal.com/donate/?hosted_button_id=V4LJ3Z3B3KXRY)! On Printables you can find more info about the project.", unsafe_allow_html=True)
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     # Input type
     with col1:
         text1 = st.text_input('First text', value="STOP")
     with col2:
         text2 = st.text_input('Second text', value="WORK")
+    with col3:
+        fontsize = st.number_input('Font size', min_value=1, max_value=None, value=20)
+        extr = fontsize*2 # extrude letter
 
     if len(text1) != len(text2):
         st.warning("The two texts don't have the same length, letters in excess will be cut", icon="⚠️")
@@ -143,7 +144,7 @@ if __name__ == "__main__":
     # base parameters
     col1, col2, col3 = st.columns(3)
     with col1:
-        b_h = st.slider('Base height', 0.0, fontsize/2, step=0.1, value=2.0)
+        b_h = st.slider('Base height', 0.0, fontsize/2, step=0.1, value=1.0)
     with col2:
         b_pad = st.slider('Base Padding', 0.0, fontsize/2, step=0.1, value=2.0)
     with col3:
