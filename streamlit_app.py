@@ -128,7 +128,7 @@ if __name__ == "__main__":
     # Input type 
     font_dir = os.listdir('fonts')
     with col1:
-        font_name = st.selectbox('Select font', sorted(font_dir))
+        font_name = st.selectbox('Select font', ['lato'] + sorted(font_dir))
     with col2:
         font_type_list = [f for f in os.listdir('fonts' + os.sep + font_name) if '.ttf' in f and '-' in f]
         # font with explicit type (-bold, -regular, ...)
