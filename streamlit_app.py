@@ -12,10 +12,10 @@ def render_svg(svg):
     html = r'<img src="data:image/svg+xml;base64,%s"/>' % b64
     st.write(html, unsafe_allow_html=True)
 
-def letter(let, angle, fontPath="", font='Arial',):
+def letter(let, angle, fontPath=""):
     """Extrude a letter, center it and rotate of the input angle"""
     wp = (cq.Workplane('XZ')
-        .text(let, fontsize, extr, fontPath=fontPath, font=font, valign='bottom')
+        .text(let, fontsize, extr, fontPath=fontPath, valign='bottom')
         )
     b_box = wp.combine().objects[0].BoundingBox()
     x_shift = -(b_box.xlen/2 + b_box.xmin )
@@ -26,15 +26,15 @@ def letter(let, angle, fontPath="", font='Arial',):
     return wp
 
 
-def dual_text(text1, text2, font='Arial', fontPath='', save='stl', b_h=2, b_pad=2, b_fil_per=0.8, space_per=0.3, export_name='file'):
+def dual_text(text1, text2, fontPath='', save='stl', b_h=2, b_pad=2, b_fil_per=0.8, space_per=0.3, export_name='file'):
     """Generate the dual letter illusion from the two text and save it"""
     space = fontsize*space_per # spece between letter
     res = cq.Assembly() # start assembly
     last_ymax = 0
     for ind, ab in enumerate(zip(text1, text2)):
         try:
-            a = letter(ab[0], 45, fontPath=fontPath, font=font)
-            b = letter(ab[1], 135, fontPath=fontPath, font=font)
+            a = letter(ab[0], 45, fontPath=fontPath)
+            b = letter(ab[1], 135, fontPath=fontPath,)
             a_inter_b = a & b
             b_box = a_inter_b.objects[0].BoundingBox()
             a_inter_b = a_inter_b.translate([0,-b_box.ymin,0])
@@ -104,6 +104,7 @@ if __name__ == "__main__":
 
     st.title('TextTango: dual text illusion')
     st.write("Generate a custom dual letter illusion, a 3d ambigram! If you like the project put a like on [Printables](https://www.printables.com/it/model/520333-texttango-dual-letter-illusion) or [support me with a coffee](https://www.paypal.com/donate/?hosted_button_id=V4LJ3Z3B3KXRY)! On Printables you can find more info about the project.", unsafe_allow_html=True)
+    st.write("The Web App supports all [Google Fonts](https://fonts.google.com/), check them out!", unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
     # Input type
@@ -124,28 +125,20 @@ if __name__ == "__main__":
     # Input type 
     font_dir = os.listdir('fonts')
     with col1:
-        font_name = st.selectbox('Select font', ['Custom font name'] + sorted(font_dir))
+        font_name = st.selectbox('Select font', sorted(font_dir))
     with col2:
-        if font_name=="Custom font name":
-            font = st.text_input('Type font name', value="Arial")
-            font_path = ""
-        else:
-            font = ""
-            font_type_list = [f for f in os.listdir('fonts' + os.sep + font_name) if '.ttf' in f and '-' in f]
-            # font with explicit type (-bold, -regular, ...)
-            if font_type_list:
-                font_start_name = font_type_list[0].split('-')[0]
-                font_type_list_name = [f.split('-')[1].strip('.ttf') for f in font_type_list]
-                font_type = st.selectbox('Font type', sorted(font_type_list_name))
-                font_type_pathname = font_start_name + '-' + font_type + '.ttf'
-                font_path = 'fonts' + os.sep + font_name + os.sep + font_type_pathname
-            else: # font without explicit type
-                font_type_list = [f for f in os.listdir('fonts' + os.sep + font_name) if '.ttf' in f]
-                font_type = st.selectbox('Font type', sorted(font_type_list))
-                font_path = 'fonts' + os.sep + font_name + os.sep + font_type
-
-    if font:
-        st.write("If the custom font is not available, the model will be rendered in Arial")
+        font_type_list = [f for f in os.listdir('fonts' + os.sep + font_name) if '.ttf' in f and '-' in f]
+        # font with explicit type (-bold, -regular, ...)
+        if font_type_list:
+            font_start_name = font_type_list[0].split('-')[0]
+            font_type_list_name = [f.split('-')[1].strip('.ttf') for f in font_type_list]
+            font_type = st.selectbox('Font type', sorted(font_type_list_name))
+            font_type_pathname = font_start_name + '-' + font_type + '.ttf'
+            font_path = 'fonts' + os.sep + font_name + os.sep + font_type_pathname
+        else: # font without explicit type
+            font_type_list = [f for f in os.listdir('fonts' + os.sep + font_name) if '.ttf' in f]
+            font_type = st.selectbox('Font type', sorted(font_type_list))
+            font_path = 'fonts' + os.sep + font_name + os.sep + font_type
     with col3:
         space = st.slider('Letters space (%)', 0, 200, step=1, value=30) / 100
     # base parameters
@@ -165,7 +158,7 @@ if __name__ == "__main__":
 
     if render:
         start = time.time()
-        dual_text(text1, text2, font=font, fontPath=font_path, save=out, b_h=b_h, b_pad=b_pad, b_fil_per=b_fil_per, space_per=space)
+        dual_text(text1, text2, fontPath=font_path, save=out, b_h=b_h, b_pad=b_pad, b_fil_per=b_fil_per, space_per=space)
         end = time.time()
         if f'file.{out}' not in os.listdir():
             st.error('The program was not able to generate the mesh.', icon="🚨")
