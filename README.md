@@ -1,6 +1,6 @@
 # TextTango: dual letter illusion
 "Generate a custom dual letter illusion, a 3d ambigram!
-Visit the original [Printables page]https://www.printables.com/it/model/505713-flexifier-flexi-3d-models-generator-print-in-place)!
+Visit the original [Printables page](https://www.printables.com/it/model/505713-flexifier-flexi-3d-models-generator-print-in-place)!
 
 ## Try the web app:
 
