@@ -13,7 +13,8 @@ Visit the original [Printables page](https://www.printables.com/it/model/520333-
 - Text
 - Font size
 - Font
-- *All Google fonts are supported*
+- **All Google fonts** are included
+- **Export STEP file** for further modifications
 
 There are cool dual-letter generators online, but I wanted to make a project:
 
