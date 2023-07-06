@@ -103,7 +103,7 @@ if __name__ == "__main__":
             os.remove(f)
 
     st.title('TextTango: dual text illusion')
-    st.write("Generate flexi 3D models from images! If you like the project put a like on [Printables](https://www.printables.com/it/model/520333-texttango-dual-letter-illusion) or [support me with a coffee](https://www.paypal.com/donate/?hosted_button_id=V4LJ3Z3B3KXRY)! On Printables you can find more info about the project.", unsafe_allow_html=True)
+    st.write("Generate a custom dual letter illusion, a 3d ambigram! If you like the project put a like on [Printables](https://www.printables.com/it/model/520333-texttango-dual-letter-illusion) or [support me with a coffee](https://www.paypal.com/donate/?hosted_button_id=V4LJ3Z3B3KXRY)! On Printables you can find more info about the project.", unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
     # Input type
@@ -127,16 +127,23 @@ if __name__ == "__main__":
         font_name = st.selectbox('Select font', ['Custom font name'] + sorted(font_dir))
     with col2:
         if font_name=="Custom font name":
-            font = st.text_input('Font name', value="Arial")
+            font = st.text_input('Type font name', value="Arial")
             font_path = ""
         else:
             font = ""
-            font_type_list = [f for f in os.listdir('fonts' + os.sep + font_name) if '.ttf' in f]
-            font_start_name = font_type_list[0].split('-')[0]
-            font_type_list_name = [f.split('-')[1].strip('.ttf') for f in font_type_list]
-            font_type = st.selectbox('Font type', sorted(font_type_list_name))
-            font_type_pathname = font_start_name + '-' + font_type + '.ttf'
-            font_path = 'fonts' + os.sep + font_name + os.sep + font_type_pathname
+            font_type_list = [f for f in os.listdir('fonts' + os.sep + font_name) if '.ttf' in f and '-' in f]
+            # font with explicit type (-bold, -regular, ...)
+            if font_type_list:
+                font_start_name = font_type_list[0].split('-')[0]
+                font_type_list_name = [f.split('-')[1].strip('.ttf') for f in font_type_list]
+                font_type = st.selectbox('Font type', sorted(font_type_list_name))
+                font_type_pathname = font_start_name + '-' + font_type + '.ttf'
+                font_path = 'fonts' + os.sep + font_name + os.sep + font_type_pathname
+            else: # font without explicit type
+                font_type_list = [f for f in os.listdir('fonts' + os.sep + font_name) if '.ttf' in f]
+                font_type = st.selectbox('Font type', sorted(font_type_list))
+                font_path = 'fonts' + os.sep + font_name + os.sep + font_type
+
     if font:
         st.write("If the custom font is not available, the model will be rendered in Arial")
     with col3:
@@ -161,7 +168,7 @@ if __name__ == "__main__":
         dual_text(text1, text2, font=font, fontPath=font_path, save=out, b_h=b_h, b_pad=b_pad, b_fil_per=b_fil_per, space_per=space)
         end = time.time()
         if f'file.{out}' not in os.listdir():
-            st.error('The program was not ot able to generate the mesh. Probably the selected font is not available.', icon="🚨")
+            st.error('The program was not able to generate the mesh.', icon="🚨")
         else:
             st.success(f'Rendered in {int(end-start)} seconds', icon="✅")
             with open(f'file.{out}', "rb") as file:
