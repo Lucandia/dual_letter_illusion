@@ -161,7 +161,8 @@ if __name__ == "__main__":
 
     if render:
         start = time.time()
-        dual_text(text1, text2, fontPath=font_path, save=out, b_h=b_h, b_pad=b_pad, b_fil_per=b_fil_per, space_per=space)
+        with st.spinner('Wait for it...'):
+            dual_text(text1, text2, fontPath=font_path, save=out, b_h=b_h, b_pad=b_pad, b_fil_per=b_fil_per, space_per=space)
         end = time.time()
         if f'file.{out}' not in os.listdir():
             st.error('The program was not able to generate the mesh.', icon="🚨")
