@@ -4,9 +4,9 @@ Visit the original [Printables page]https://www.printables.com/it/model/505713-f
 
 ## Try the web app:
 
-[Flexifier web app](https://lmonari5-flexifier.streamlit.app/) powered by streamlit
+[Flexifier web app](https://texttango-dual-letter-illusion.streamlit.app/) powered by streamlit
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://lmonari5-flexifier.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://texttango-dual-letter-illusion.streamlit.app/)
 
 ## Customize
 
