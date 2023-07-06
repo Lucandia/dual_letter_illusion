@@ -157,9 +157,8 @@ if __name__ == "__main__":
     col1, _, _ = st.columns(3)
     with col1:
         out = st.selectbox('Output file type', ['stl', 'step'])
-    render = st.button('Render')
 
-    if render:
+    if st.button('Render'):
         start = time.time()
         with st.spinner('Wait for it...'):
             dual_text(text1, text2, fontPath=font_path, save=out, b_h=b_h, b_pad=b_pad, b_fil_per=b_fil_per, space_per=space)
