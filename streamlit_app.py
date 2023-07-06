@@ -171,7 +171,7 @@ if __name__ == "__main__":
                 btn = st.download_button(
                         label=f"Download {out}",
                         data=file,
-                        file_name=f'TextTango.{out}',
+                        file_name=f'TextTango_{text1}_{text2}.{out}',
                         mime=f"model/{out}"
                     )
             st.markdown("Post the make [on Printables](https://www.printables.com/it/model/520333-texttango-dual-letter-illusion) to support the project!", unsafe_allow_html=True)
