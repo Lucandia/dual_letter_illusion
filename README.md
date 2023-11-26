@@ -4,9 +4,9 @@ Visit the original [Printables page](https://www.printables.com/it/model/520333-
 
 ## Try the web app:
 
-[TextTango web app](https://texttango-dual-letter-illusion.streamlit.app/) powered by streamlit
+[TextTango web app](https://dual-letter-illusion.streamlit.app/) powered by streamlit
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://texttango-dual-letter-illusion.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://dual-letter-illusion.streamlit.app/)
 
 ## Customize
 
