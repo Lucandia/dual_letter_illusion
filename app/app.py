@@ -171,5 +171,5 @@ if __name__ == "__main__":
             st.markdown("I am a student who enjoys 3D printing and programming. To support me with a coffee, just [click here!](https://www.paypal.com/donate/?hosted_button_id=V4LJ3Z3B3KXRY)", unsafe_allow_html=True)
 
             # stl preview
-            stl_preview('#505050', "material")
+            stl_preview('#696969', "material")
 
