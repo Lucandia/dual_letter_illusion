@@ -147,12 +147,9 @@ if __name__ == "__main__":
         b_fil_per = st.slider('Base fillet (%)', 0, 100, step=1, value=80) / 100
 
 
-    col1, col2, _ = st.columns(3)
+    col1, _, _ = st.columns(3)
     with col1:
         out = st.selectbox('Output file type', ['stl', 'step'])
-    with col2:
-        if st.toggle("Flip the second word", key='flip_second'):
-            text2 = text2[::-1]
             
 
     if st.button('Render'):
