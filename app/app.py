@@ -2,41 +2,7 @@ import cadquery as cq
 import streamlit as st
 import os
 import time
-from uuid import uuid4
 from streamlit_stl import stl_from_file
-
-def stl_preview(color, render):
-    # Load and embed the JavaScript file
-    with open("js/three.min.js", "r") as js_file:
-        three_js = js_file.read()
-
-    with open("js/STLLoader.js", "r") as js_file:
-        stl_loader = js_file.read()
-
-    with open("js/OrbitControls.js", "r") as js_file:
-        orbital_controls = js_file.read()
-
-    with open("js/stl-viewer.js", "r") as js_file:
-        stl_viewer_component = (
-            js_file.read()
-            .replace('{__REPLACE_COLOR__}',f'0x{color[1:]}')
-            .replace('{__REPLACE_MATERIAL__}',render)
-        )
-
-    
-    session_id = st.session_state['session_id']
-    st.components.v1.html(
-        r'<div style="height:500px">'+
-        r'<script>'+
-        three_js+' '+
-        stl_loader+' '+
-        orbital_controls+' '+
-        stl_viewer_component+' '+
-        r'</script>'+
-        r'<stl-viewer model="./app/static/model_' + str(session_id) + '.stl?cache='+str(time.time())+r'"></stl-viewer>'+
-        r'</div>',
-        height = 500
-        )
 
 def letter(let, angle, fontPath=""):
     """Extrude a letter, center it and rotate of the input angle"""
@@ -82,16 +48,11 @@ def dual_text(text1, text2, fontPath='', save='stl', b_h=2, b_pad=2, b_fil_per=0
     res = res.toCompound()
     res = res.translate([0, -b_box.ylen/2,0])
     # export the files
-    cq.exporters.export(res, f'./app/static/model_{session_id}.stl')
+    cq.exporters.export(res, f'file_display.stl')
     cq.exporters.export(res, f"{export_name}.{save}")
 
 
 if __name__ == "__main__":
-    # initialize session id
-    if "session_id" not in st.session_state:
-        st.session_state['session_id'] = uuid4()
-    session_id = st.session_state['session_id']
-    
     for file in os.listdir():
         if 'file' in file:
             try:
@@ -173,5 +134,5 @@ if __name__ == "__main__":
             st.markdown("I am a student who enjoys 3D printing and programming. To support me with a coffee, just [click here!](https://www.paypal.com/donate/?hosted_button_id=V4LJ3Z3B3KXRY)", unsafe_allow_html=True)
 
             # stl preview
-            stl_from_file(f'file.{out}')
+            stl_from_file('file_display.stl')
 
