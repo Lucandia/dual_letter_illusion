@@ -53,6 +53,7 @@ def dual_text(text1, text2, fontPath='', save='stl', b_h=2, b_pad=2, b_fil_per=0
 
 
 if __name__ == "__main__":
+    st.set_page_config(page_title="TextTango", page_icon="random", layout="wide", initial_sidebar_state="collapsed")
     for file in os.listdir():
         if 'file' in file:
             try:
@@ -60,7 +61,7 @@ if __name__ == "__main__":
             except:
                 print(f'Cannot remove file {file}')
 
-    st.title('TextTango: dual text illusion')
+    st.title('TextTango: Dual Letter Illusion')
     st.write("Generate a custom dual letter illusion, a 3d ambigram! If you like the project put a like on [Printables](https://www.printables.com/it/model/520333-texttango-dual-letter-illusion) or [support me with a coffee](https://www.paypal.com/donate/?hosted_button_id=V4LJ3Z3B3KXRY)! On Printables you can find more info about the project.", unsafe_allow_html=True)
     st.write("The Web App supports all [Google Fonts](https://fonts.google.com/), check them out!", unsafe_allow_html=True)
 
