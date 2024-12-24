@@ -8,23 +8,24 @@ datas += copy_metadata("streamlit")
 datas += copy_metadata("cadquery")
 datas += collect_data_files("streamlit_stl", include_py_files=True)
 datas += [('fonts', 'fonts'),
-          ('app', 'app'),]
-
+          ('app', 'app')]
 
 a = Analysis(
     ['app/run.py'],
     pathex=["."],
     binaries=[],
     datas=datas,
-    hiddenimports=['cadquery', 
-                   'OCP', 
-                   'vtk', 
-                   'streamlit_stl',
-                   'streamlit', 
-                   'os', 
-                   'sys', 
-                   'pathlib', 
-                   'time'],
+    hiddenimports=[
+        'cadquery',
+        'OCP',
+        'vtk',
+        'streamlit_stl',
+        'streamlit',
+        'os',
+        'sys',
+        'pathlib',
+        'time'
+    ],
     hookspath=['./hooks'],
     hooksconfig={},
     runtime_hooks=[],
@@ -32,7 +33,8 @@ a = Analysis(
     noarchive=False,
     optimize=0,
 )
-pyz = PYZ(a.pure)
+
+pyz = PYZ(a.pure, a.zipped_data)
 
 exe = EXE(
     pyz,
@@ -40,14 +42,14 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='run',
+    name='TextTango',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
     upx_exclude=[],
     runtime_tmpdir=None,
-    console=True,
+    console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
