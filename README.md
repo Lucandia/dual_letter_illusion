@@ -2,9 +2,18 @@
 "Generate a custom dual letter illusion, a 3d ambigram!
 Visit the original [Printables page](https://www.printables.com/it/model/520333-texttango-dual-letter-illusion)!
 
+## How to use
+
+Read the  instructions and download the released executable files for your operating system from the [release page](https://github.com/Lucandia/dual_letter_illusion/releases).
+**The standalone executables have a slow startup time, please be patient!**
+
 ## Try the web app:
 
 [TextTango web app](https://dual-letter-illusion.streamlit.app/) powered by streamlit
+
+### DISCLAIMER
+
+**Streamlit Cloud is a free platform, but it has some limitations. The app often crashes due to the free tier limitations. It usually reboot after some hours. If you want to use the app without interruptions, download the standalone executables from the [release page](https://github.com/Lucandia/dual_letter_illusion/releases).**
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://dual-letter-illusion.streamlit.app/)
 
