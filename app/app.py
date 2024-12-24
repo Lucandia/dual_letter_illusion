@@ -89,6 +89,13 @@ if __name__ == "__main__":
     st.write("Generate a custom dual letter illusion, a 3d ambigram! If you like the project put a like on [Printables](https://www.printables.com/it/model/520333-texttango-dual-letter-illusion) or [support me with a coffee](https://www.paypal.com/donate/?hosted_button_id=V4LJ3Z3B3KXRY)! On Printables you can find more info about the project.", unsafe_allow_html=True)
     st.write("The Web App supports all [Google Fonts](https://fonts.google.com/), check them out!", unsafe_allow_html=True)
 
+    st.markdown("""
+### DISCLAIMER
+#### Streamlit Cloud is a free platform, and has some limitations. The app often crashes and usually reboot after some hours. 
+#### If you want to use the app without interruptions, leave a like on [Printables Page](https://www.printables.com/it/model/520333-texttango-dual-letter-illusion) and read the instructions and download the app from the [GitHub Release Page](https://github.com/Lucandia/dual_letter_illusion/releases).
+""",    
+    unsafe_allow_html=True)
+
     col1, col2, col3 = st.columns(3)
     # Input type
     with col1:
